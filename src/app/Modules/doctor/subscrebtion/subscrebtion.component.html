@@ -1,0 +1,73 @@
+<div class="row ">
+  <div class="card rounded-0 ms-4 table-responsive" style="width: 95% ;">
+    <span class="fw-bold fs-4 text-center p-4">طلبات الاشتراك</span>
+    <div class="alert alert-danger text-center" role="alert" *ngIf="showAlert">
+      {{ AlertMsg }}
+    </div>
+    
+
+    <table class="table table-bordered table-hover text-center border">
+      <thead class="border">
+        <th class="border">رفض/قبول</th>
+        <th class="border">رقم التليفون</th>
+        <th class="border">البريد الالكتروني</th>
+        <th class="border">الوزن</th>
+        <th class="border">الطول</th>
+        <th class="border">اسم المريض</th>
+      </thead>
+
+      <tbody class="border">
+      <tr class="border"  class="border py-auto" *ngFor="let patient of waitingPatients">
+      
+        <td class="border">
+          <button class="btn btn-success m-2 buttonn1"  data-bs-toggle="modal" data-bs-target="#exampleModal" >قبول</button>
+          <button class="btn btn-danger m-2 buttonn2" data-bs-toggle="modal" data-bs-target="#close"   >رفض</button>
+        </td>
+
+        <td class="border">{{patient?.phoneNumber}}</td>
+        <td class="border">{{patient?.email}}</td>
+        <td class="border">{{patient?.weight}}</td>
+        <td class="border">{{patient?.height}}</td>
+        <td class="border">{{patient?.fullName}}</td>
+        <div class="modal " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content " style="  margin-top: 60%;">
+              <div class="modal-header">
+                <h5 class="modal-title fs-5" id="exampleModalLabel">نعم</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+            هل تريد تاكيد قبول الاشتراك
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">رجوع</button>
+                <button type="button" class="btn btn-success" (click)="AcceptPatient(patient.id)" data-bs-dismiss="modal" >تاكيد</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal " id="close" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content" style="  margin-top: 60%;">
+              <div class="modal-header">
+                <h5 class="modal-title fs-5" id="exampleModalLabel">التاكيد</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+               هل تريد تاكيد رفض الاشتراك
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">رجوع</button>
+                <button type="button" class="btn btn-success" (click)="RejectPatient(patient.id)" data-bs-dismiss="modal" >نعم</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </tr>
+          </tbody>
+    </table>
+
+<!-- Modal -->
+
+  </div>
+</div>
